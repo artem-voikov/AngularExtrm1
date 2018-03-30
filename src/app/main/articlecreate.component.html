@@ -1,0 +1,16 @@
+<h2>Create article</h2>
+<a [routerLink]="['/articles']">articles list</a>
+<div class="container">
+
+  <form [formGroup]="article">
+    <div class="form-group">
+      <label for="exampleFormControlInput1">Title</label>
+      <input type="email" formControlName="title" class="form-control" id="exampleFormControlInput1" placeholder="Some shitty points I would like to share with you, bitchezz">
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Body</label>
+      <textarea class="form-control" formControlName="body" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+    <button type="submit" (click)="onSubmit()" >fire</button>
+  </form>
+</div>

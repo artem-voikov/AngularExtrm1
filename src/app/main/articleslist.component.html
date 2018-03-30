@@ -1,0 +1,13 @@
+<p>
+  articleslist works!
+</p>
+<a [routerLink]="['/createarticle']">create article</a>
+
+<ul>
+  <li *ngFor="let a of articles">
+    <div>
+      <p>{{a.id}} {{a.title}}</p>
+      <p>{{a.body}}</p>
+    </div>
+  </li>
+</ul>
