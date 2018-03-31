@@ -4,6 +4,7 @@ import { RepoarticlesService } from "./repoarticles.service";
 import { RepousersService } from "./repousers.service";
 import { LocalstorageService } from "./localstorage.service";
 import { UowarticleService } from "./uowarticle.service";
+import { ApiService } from './api.service';
 
 @NgModule({
   imports: [CommonModule],
@@ -12,7 +13,8 @@ import { UowarticleService } from "./uowarticle.service";
     UowarticleService,
     RepoarticlesService,
     RepousersService,
-    LocalstorageService
+    LocalstorageService,
+    ApiService
 
   ]
 })

@@ -1,9 +1,10 @@
 export interface User {
   id: number;
-  username: string;
-  pwd: string;
-  fname: string;
-  lname: string;
   email: string;
-
+  createdAt: string | Date;
+  updatedAt: string | Date;
+  username: string;
+  image: string;
+  bio: string;
+  token: string;
 }

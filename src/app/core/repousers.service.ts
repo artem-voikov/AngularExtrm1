@@ -1,40 +1,41 @@
+import { tap } from "rxjs/operators/tap";
+import { ApiService } from "./api.service";
 import { LocalstorageService } from "./localstorage.service";
-import { User } from "./../models/user";
 import { Injectable } from "@angular/core";
+import { User } from "../models/user";
 
 @Injectable()
 export class RepousersService {
-  private users: User[] = [];
-  private usersKey = "signuppedusers";
+  private readonly userTokenKey = "usertoke";
 
-  constructor(private localstorageService: LocalstorageService) {
-    this.users = this.localstorageService.GetItem(this.usersKey);
-  }
-
-  userExist(username: string, pwd: string): boolean {
-    return (
-      this.users.find(x => x.username === username && x.pwd === pwd) === null
-    );
-  }
+  constructor(
+    private localstorageService: LocalstorageService,
+    private apiService: ApiService
+  ) {}
 
   signup(user: User): boolean {
-    if (!this.userExist(user.username, user.pwd)) {
-      return false;
-    }
-
-    this.users.push(user);
-    this.flush();
+    this.apiService
+      .post<User>("users", { user })
+      .pipe(tap(x => this.setAuth(x)));
 
     return true;
   }
 
-  signin(username: string, pwd: string): boolean {
+  signin(user: User): boolean {
+    this.apiService
+      .post<User>("users/login", { user })
+      .pipe(tap(x => this.setAuth(x)));
 
+    return true;
   }
 
-  singout(): boolean {}
+  singout(): boolean {
+    localStorage.removeItem(this.userTokenKey);
+    return true;
+  }
 
-  private flush() {
-    this.localstorageService.SetItem(this.usersKey, this.users);
+  setAuth(user: User) {
+    localStorage.setItem(this.userTokenKey, user.token);
+    return true;
   }
 }
