@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 import { tap } from "rxjs/operators/tap";
 import { ApiService } from "./api.service";
 import { LocalstorageService } from "./localstorage.service";
@@ -21,7 +22,7 @@ export class RepousersService {
     return true;
   }
 
-  signin(user: User): boolean {
+  signin(user: User) {
     this.apiService
       .post<User>("users/login", { user })
       .pipe(tap(x => this.setAuth(x)));

@@ -9,6 +9,8 @@ export class LocalstorageService {
   }
 
   GetItem<T>(key: string): T {
-    return JSON.parse(window.localStorage[key]);
+    return window.localStorage[key] == null
+      ? []
+      : JSON.parse(window.localStorage[key]);
   }
 }

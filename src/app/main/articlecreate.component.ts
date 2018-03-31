@@ -2,7 +2,7 @@ import { RepoarticlesService } from "./../core/repoarticles.service";
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Article } from "../models/article";
-import { UowarticleService } from '../core/uowarticle.service';
+import { UowarticleService } from "../core/uowarticle.service";
 
 @Component({
   selector: "app-articlecreate",
@@ -22,16 +22,12 @@ export class ArticlecreateComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.article);
-
     const item: Article = this.article.value;
-
-    console.log([item, this.article.value]);
-
-    if (this.article.invalid) { return; }
+    if (this.article.invalid) {
+      return;
+    }
 
     this.uowarticleService.AddArticle(item);
-
     this.article.reset();
   }
 }
