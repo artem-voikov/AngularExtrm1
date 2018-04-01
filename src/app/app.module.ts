@@ -8,6 +8,7 @@ import { CoreModule } from "./core/core.module";
 import { RouterModule, Routes } from "@angular/router";
 import { ArticleslistComponent } from "./main/articleslist.component";
 import { ArticlecreateComponent } from "./main/articlecreate.component";
+import { UserModule } from './user/user.module';
 
 const routes: Routes = [
   { path: "articles", component: ArticleslistComponent },
@@ -22,7 +23,8 @@ const routes: Routes = [
     MainModule,
     SharedModule,
     CoreModule,
-    RouterModule.forRoot(routes) // вот тут делаем маршруты для наших роутов
+    RouterModule.forRoot(routes),
+    UserModule // вот тут делаем маршруты для наших роутов
   ],
   providers: [],
   bootstrap: [AppComponent]

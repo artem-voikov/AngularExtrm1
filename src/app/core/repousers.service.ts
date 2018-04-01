@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Observable';
+import { Observable } from "rxjs/Observable";
 import { tap } from "rxjs/operators/tap";
 import { ApiService } from "./api.service";
 import { LocalstorageService } from "./localstorage.service";
@@ -8,6 +8,7 @@ import { User } from "../models/user";
 @Injectable()
 export class RepousersService {
   private readonly userTokenKey = "usertoke";
+  private readonly userNameKey = "username";
 
   constructor(
     private localstorageService: LocalstorageService,
@@ -37,6 +38,22 @@ export class RepousersService {
 
   setAuth(user: User) {
     localStorage.setItem(this.userTokenKey, user.token);
+    localStorage.setItem(this.userNameKey, user.username);
     return true;
+  }
+
+  signedindata() {
+    if (!this.localstorageService.GetItem(this.userTokenKey)) {
+      return null;
+    }
+
+    return {
+      username: this.localstorageService.GetItem<string>(this.userNameKey),
+      token: this.localstorageService.GetItem<string>(this.userTokenKey)
+    };
+  }
+
+  signedin(): boolean {
+    return this.signedindata !== null;
   }
 }
